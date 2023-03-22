@@ -56,7 +56,11 @@ public class EmployeeService {
 	}
 	
 	public void deleteByID(Long id) {
-		this.EmployeeRepository.deleteById(id);
+		try {
+			this.EmployeeRepository.deleteById(id);
+		}catch(Error e) {
+			throw new Error("Not able to delete");
+		}
 	}
 
 }
