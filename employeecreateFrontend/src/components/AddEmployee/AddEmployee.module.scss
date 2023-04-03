@@ -1,0 +1,146 @@
+.container__AddEmployee__title {
+  padding: 0%;
+  margin: 0%;
+  font-family: "Times New Roman", Times, serif;
+  .container__title_backgroundColor {
+    padding: 3%;
+    margin: 0%;
+    background-color: rgb(204, 204, 204);
+  }
+
+  .container__body {
+    margin: 5%;
+    label {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    input {
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+      border: 1px solid black;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      width: 300px;
+    }
+    p {
+      padding: 0%;
+      margin: 10px;
+      font-size: 0.75rem;
+      color: red;
+    }
+    .container__personal_details_flex {
+      .container__mobile_number {
+        label {
+          margin-bottom: 0rem;
+        }
+        span {
+          font-size: 0.75rem;
+          color: grey;
+        }
+        input {
+          width: 200px;
+        }
+        .countryCode_readOnly {
+          background-color: grey;
+          width: 30px;
+        }
+      }
+
+      .container__residential_Address {
+        label {
+          margin-bottom: 0rem;
+        }
+        span {
+          font-size: 0.75rem;
+          color: grey;
+        }
+        input {
+          width: 400px;
+        }
+      }
+    }
+    .container__Employee_status {
+      display: flex;
+      flex-direction: column;
+
+      input[type="radio"] {
+        border: 0px;
+        width: 2rem;
+        height: 2em;
+      }
+      .container__input_radio_permanent,
+      .container__input_radio_contract {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .container__startDate,
+      .container__finishDate {
+        display: flex;
+        flex-direction: row;
+
+        input {
+          width: 100px;
+          margin-right: 10px;
+        }
+        select {
+          padding: 0.5rem;
+          border-radius: 0.25rem;
+          border: 1px solid black;
+          font-size: 1rem;
+          width: 200px;
+          margin-right: 10px;
+        }
+      }
+
+      .container__ongoing_checkbox {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        input {
+          height: 1.5rem;
+          width: 1.5rem;
+        }
+      }
+
+      .container__timebasis {
+        .container__fulltime_flex,
+        .container__parttime_flex {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+      }
+      .container__hours {
+        input {
+          width: 100px;
+        }
+      }
+    }
+
+    .container__button_submit {
+      background-color: #052888;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      padding: 10px 46px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    .container__button_clear {
+      background-color: white;
+      color: black;
+      padding: 12px 34px;
+      border: 1px solid black;
+      border-radius: 4px;
+    }
+  }
+}

@@ -5,7 +5,7 @@ import EditEmployee from "./components/EditEmployee/EditEmployee";
 import GetAllEmployees from "./components/GetAllEmployees/GetAllEmployees";
 import { AllEmployeeContext } from "./context/GetAllEmployeesContext";
 import { getAllEmployees } from "./services/post-services";
-import "./App.css";
+import styles from "./App.module.scss";
 import { Employee } from "./Interfaces/EmployeeInterface";
 
 function App() {
@@ -23,6 +23,7 @@ function App() {
   }, []);
 
   return (
+    <div className={styles.app}>
     <AllEmployeeContext.Provider value={{ allEmployees, setAllEmployees }}>
       <BrowserRouter>
         <div>{loading && <p>Loading...</p>}</div>
@@ -33,6 +34,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </AllEmployeeContext.Provider>
+    </div>
   );
 }
 
