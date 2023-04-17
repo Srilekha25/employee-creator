@@ -24,8 +24,8 @@ The list of employees is a local MySql database
     
 # application.properties starter:
 - spring.datasource.url=jdbc:mysql://localhost:3306/<db_name>
-- spring.datasource.username=<username>
-- spring.datasource.password=<Your Password>
+- spring.datasource.username= <username>
+- spring.datasource.password= <Your Password>
 - spring.jpa.hibernate.ddl-auto=update
 - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
 - spring.jpa.generate-ddl=true
