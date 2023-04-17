@@ -6,6 +6,7 @@ import { Employee } from "../../Interfaces/EmployeeInterface";
 import { createEmployee, getAllEmployees } from "../../services/post-services";
 
 import styles from "../AddEmployee/AddEmployee.module.scss";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const AddEmployee = () => {
   const { allEmployees, setAllEmployees } = useEmployeeContext();
@@ -15,8 +16,6 @@ const AddEmployee = () => {
   const [finishDay, setFinishDay] = useState("");
   const [finishMonth, setFinishMonth] = useState("");
   const [finishYear, setFinishYear] = useState("");
-  const [startDate, setStartDate] = useState(new Date("yyyy-mm-dd"));
-  const [finishDate, setFinishDate] = useState(new Date("yyyy-mm-dd"));
 
   const handleStartChangeDay = (event: React.ChangeEvent<HTMLInputElement>) => {
     setStartDay(event.target.value);
@@ -26,13 +25,12 @@ const AddEmployee = () => {
   const handleStartChangeMonth = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    if(event.target.value != "select"){
+    if (event.target.value != "select") {
       setStartMonth(event.target.value);
-      console.log("start month", startMonth);
-    }else{
-      {errors?.startDate?.type === "required" && (
-        <p>Please select a month</p>
-      )}
+    } else {
+      {
+        errors?.startDate?.type === "required" && <p>Please select a month</p>;
+      }
     }
   };
 
@@ -40,26 +38,23 @@ const AddEmployee = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setStartYear(event.target.value);
-    console.log("start year", startYear);
   };
 
   const handleFinishChangeDay = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setFinishDay(event.target.value);
-    console.log("finish day: ", finishDay);
   };
 
   const handleFinishChangeMonth = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    if(event.target.value != "select"){
+    if (event.target.value != "select") {
       setFinishMonth(event.target.value);
-      console.log("finish month", finishMonth);
-    }else{
-      {errors?.finishDate?.type === "required" && (
-        <p>Please select a month</p>
-      )}
+    } else {
+      {
+        errors?.finishDate?.type === "required" && <p>Please select a month</p>;
+      }
     }
   };
 
@@ -67,7 +62,6 @@ const AddEmployee = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setFinishYear(event.target.value);
-    console.log("finish year", finishYear);
   };
 
   const {
@@ -83,17 +77,14 @@ const AddEmployee = () => {
     const combinedFinishDate = new Date(
       `${finishYear}-${finishMonth}-${finishDay}`
     );
-    setStartDate(combinedStartDate);
-    setFinishDate(combinedFinishDate);
-    
+
     await createEmployee({
       ...data,
       startDate: combinedStartDate,
       finishDate: combinedFinishDate,
-    }).then((response: Boolean) => {
+    }).then((response: boolean) => {
       if (response) {
         getAllEmployees().then((data: []) => {
-          console.log("data in app.jsx", data);
           setAllEmployees(data);
           alert("employee added");
         });
@@ -369,7 +360,7 @@ const AddEmployee = () => {
 
             <div className={styles.container__hours}>
               <label>Hours per week</label>
-              <input type="number" {...register("hours")} />
+              <input type="number" min="0" max="168" {...register("hours")} />
             </div>
           </div>
 
