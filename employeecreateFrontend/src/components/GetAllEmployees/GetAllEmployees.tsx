@@ -16,7 +16,7 @@ const GetAllEmployees = () => {
     isError,
   } = useQuery<Employee[] | null>(["allEmployees"], getAllEmployees);
   if (isError) {
-    return <h2>Error while fetch Employees.</h2>;
+    return <h2>Error while fetching Employees.</h2>;
   }
 
   const currentDate = new Date();

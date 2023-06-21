@@ -1,0 +1,60 @@
+.container__Employee_status {
+    display: flex;
+    flex-direction: column;
+
+    input[type="radio"] {
+      border: 0px;
+      width: 2rem;
+      height: 2em;
+    }
+    .container__input_radio_permanent,
+    .container__input_radio_contract {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .container__startDate,
+    .container__finishDate {
+      display: flex;
+      flex-direction: row;
+
+      input {
+        width: 100px;
+        margin-right: 10px;
+      }
+      select {
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        border: 1px solid black;
+        font-size: 1rem;
+        width: 200px;
+        margin-right: 10px;
+      }
+    }
+
+    .container__ongoing_checkbox {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      input {
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+    }
+
+    .container__timebasis {
+      .container__fulltime_flex,
+      .container__parttime_flex {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+    .container__hours {
+      input {
+        width: 100px;
+      }
+    }
+  }
