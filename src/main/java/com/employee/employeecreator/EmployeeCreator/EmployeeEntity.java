@@ -1,6 +1,8 @@
 package com.employee.employeecreator.EmployeeCreator;
 
-import java.util.Date;
+import java.time.LocalDate;
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+@EnableAutoConfiguration
 @Entity
 @Table(name="Employee_list")
 public class EmployeeEntity {
@@ -32,18 +35,18 @@ public class EmployeeEntity {
 	@Column
 	private String contractType;
 	@Column
-	private Date startDate;
+	private LocalDate startDate;
 	@Column
-	private Date finishDate;
+	private LocalDate finishDate;
 	@Column
 	private Boolean ongoing;
 	@Column
 	private String timeBasis;
 	@Column
-	private String hours;
+	private Long hours;
 	public EmployeeEntity(Long id, String firstName, String middleName, String lastName, String email,
-			String mobileNumber, String address, String contractType, Date startDate, Date finishDate, Boolean ongoing,
-			String timeBasis,  String hours) {
+			String mobileNumber, String address, String contractType, LocalDate startDate, LocalDate finishDate, Boolean ongoing,
+			String timeBasis,  Long hours) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -111,16 +114,16 @@ public class EmployeeEntity {
 	public void setContractType(String contractType) {
 		this.contractType = contractType;
 	}
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
-	public Date getFinishDate() {
+	public LocalDate getFinishDate() {
 		return finishDate;
 	}
-	public void setFinishDate(Date finishDate) {
+	public void setFinishDate(LocalDate finishDate) {
 		this.finishDate = finishDate;
 	}
 	public Boolean getOngoing() {
@@ -135,12 +138,10 @@ public class EmployeeEntity {
 	public void setTimeBasis(String timeBasis) {
 		this.timeBasis = timeBasis;
 	}
-	public String getHours() {
+	public Long getHours() {
 		return hours;
 	}
-	public void setHours(String hours) {
+	public void setHours(Long hours) {
 		this.hours = hours;
 	}
-	
-	
 }

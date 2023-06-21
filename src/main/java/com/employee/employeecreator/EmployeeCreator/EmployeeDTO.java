@@ -1,6 +1,6 @@
 package com.employee.employeecreator.EmployeeCreator;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class EmployeeDTO {
 	String firstName;
@@ -10,19 +10,19 @@ public class EmployeeDTO {
 	String mobileNumber;
 	String address;
 	String contractType;
-	Date startDate;
-	Date finishDate;
+	LocalDate startDate;
+	LocalDate finishDate;
 	Boolean ongoing;
 	String timeBasis;
-	String hours;
+	Long hours;
 	
 	public EmployeeDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public EmployeeDTO(String firstName, String middleName, String lastName, String email, String mobileNumber,
-			String address, String contractType, Date startDate, Date finishDate, Boolean ongoing, String timeBasis,
-			String hours) {
+			String address, String contractType, LocalDate startDate, LocalDate finishDate, Boolean ongoing, String timeBasis,
+			Long hours) {
 		super();
 		this.firstName = firstName;
 		this.middleName = middleName;
@@ -79,16 +79,16 @@ public class EmployeeDTO {
 	public void setContractType(String contractType) {
 		this.contractType = contractType;
 	}
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
-	public Date getFinishDate() {
+	public LocalDate getFinishDate() {
 		return finishDate;
 	}
-	public void setFinishDate(Date finishDate) {
+	public void setFinishDate(LocalDate finishDate) {
 		this.finishDate = finishDate;
 	}
 	public Boolean getOngoing() {
@@ -103,10 +103,10 @@ public class EmployeeDTO {
 	public void setTimeBasis(String timeBasis) {
 		this.timeBasis = timeBasis;
 	}
-	public String getHours() {
+	public Long getHours() {
 		return hours;
 	}
-	public void setHours(String hours) {
+	public void setHours(Long hours) {
 		this.hours = hours;
 	}
 	

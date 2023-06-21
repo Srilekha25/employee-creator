@@ -34,6 +34,7 @@ public class EmployeeService {
 		employeeEntity.setFinishDate(employeeDTO.getFinishDate());
 		employeeEntity.setOngoing(employeeDTO.getOngoing());
 		employeeEntity.setTimeBasis(employeeDTO.getTimeBasis());
+		employeeEntity.setHours(employeeDTO.getHours());
 		
 		return this.EmployeeRepository.save(employeeEntity);
 		
