@@ -1,0 +1,31 @@
+.container__personal_details_flex {
+    .container__mobile_number {
+      label {
+        margin-bottom: 0rem;
+      }
+      span {
+        font-size: 0.75rem;
+        color: grey;
+      }
+      input {
+        width: 200px;
+      }
+      .countryCode_readOnly {
+        background-color: grey;
+        width: 30px;
+      }
+    }
+
+    .container__residential_Address {
+      label {
+        margin-bottom: 0rem;
+      }
+      span {
+        font-size: 0.75rem;
+        color: grey;
+      }
+      input {
+        width: 400px;
+      }
+    }
+  }

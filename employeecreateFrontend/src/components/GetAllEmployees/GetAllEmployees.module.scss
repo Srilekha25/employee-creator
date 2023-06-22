@@ -1,0 +1,54 @@
+.container__getAllEmployees__title {
+  padding: 0%;
+  margin: 0%;
+  .container__title_backgroundColor {
+    padding: 5%;
+    margin: 0%;
+    background-color: rgb(204, 204, 204);
+  }
+
+  .container__body {
+    margin: 5%;
+    .conatiner__description__flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .container__button__background_blue {
+        background-color: #052888;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        padding: 16px 20px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+    }
+
+    .container__employees_flex {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .hr__solid {
+        border-top: 3px solid #bbb;
+      }
+
+      .container__buttons_flex {
+        button{
+            background-color: white;
+            border: none;
+            color:#052888;
+            cursor: pointer;
+        }
+        a{
+            text-decoration: none;
+            color:#052888;
+        }
+      }
+    }
+  }
+}
