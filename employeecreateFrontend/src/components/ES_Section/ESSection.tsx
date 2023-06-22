@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Employee } from "../../Interfaces/EmployeeInterface";
+import { useState } from "react";
 
 import styles from "./ESSection.module.scss";
 
@@ -14,7 +12,7 @@ const ESSection = ({ register, errors }: any) => {
 
   const handleOnGoing = () => {
     const currentDate = new Date();
-    const currentDay = String(currentDate.getDay());
+    const currentDay = String(currentDate.getDate());
     const currentMonth = String(currentDate.getMonth() + 1);
     const currentYear = String(currentDate.getFullYear());
 
@@ -116,6 +114,7 @@ const ESSection = ({ register, errors }: any) => {
             <input
               {...register("finishDay", { required: true })}
               type="number"
+              value={finishDay}
               min="1"
               max="31"
               onChange={(event) => setFinishDay(event.target.value)}
@@ -127,8 +126,8 @@ const ESSection = ({ register, errors }: any) => {
 
             <select
               {...register("finishMonth", { required: true })}
-              onChange={(event) => setFinishMonth(event.target.value)}
               value={finishMonth}
+              onChange={(event) => setFinishMonth(event.target.value)}
             >
               <option></option>
               <option value="01">January</option>

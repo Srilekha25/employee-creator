@@ -1,12 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import styles from "./Header.module.scss"
+import BackButton from '../BackButton/BackButton'
 
 const Header = () => {
   return (
     <div className={styles.container__title_backgroundColor}>
-          &#60; <Link to="/" role="back">Back</Link>
+          <BackButton/>
           <h1>Employee Details</h1>
         </div>
   )

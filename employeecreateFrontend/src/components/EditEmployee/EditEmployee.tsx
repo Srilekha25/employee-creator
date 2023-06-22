@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 import { Employee } from '../../Interfaces/EmployeeInterface';
 import { patchEmployeeByID, retrieveEmployeeByID } from '../../services/post-services';
 
-import styles from "../AddEmployee/AddEmployee.module.scss";
+import styles from "./EditEmployee.module.scss";
 
 const EditEmployee = () => {
   const { id } = useParams<{ id: string}>();
@@ -18,7 +18,6 @@ const EditEmployee = () => {
 
   const onSubmit: SubmitHandler<Employee> = async (data) => {
     await patchEmployeeByID(id || "", data).then((response: Employee)=>{
-      console.log("Employee in edit after retrieve-> ",response);
       reset(response);
     });
   };
@@ -41,44 +40,15 @@ const EditEmployee = () => {
   const [startDate, setStartDate] = useState(new Date("yyyy-mm-dd"));
   const [finishDate, setFinishDate] = useState(new Date("yyyy-mm-dd"));
 
-  const handleStartChangeDay = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setStartDay(event.target.value);
-    console.log("start day: ", startDay);
-  };
+  const handleOnGoing = () => {
+    const currentDate = new Date();
+    const currentDay = String(currentDate.getDate());
+    const currentMonth = String(currentDate.getMonth() + 1);
+    const currentYear = String(currentDate.getFullYear());
 
-  const handleStartChangeMonth = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    setStartMonth(event.target.value);
-    console.log("start month", startMonth);
-  };
-
-  const handleStartChangeYear = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setStartYear(event.target.value);
-    console.log("start year", startYear);
-  };
-
-  const handleFinishChangeDay = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setFinishDay(event.target.value);
-    console.log("finish day: ", finishDay);
-  };
-
-  const handleFinishChangeMonth = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    setFinishMonth(event.target.value);
-    console.log("finish month", finishMonth);
-  };
-
-  const handleFinishChangeYear = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setFinishYear(event.target.value);
-    console.log("finish year", finishYear);
+    setFinishDay(currentDay);
+    setFinishMonth(currentMonth);
+    setFinishYear(currentYear);
   };
 
   return (
@@ -216,110 +186,123 @@ const EditEmployee = () => {
           </div>
 
           <div>
-            <label>Start date</label>
-            <br />
-            <div className={styles.container__startDate}>
-              <div>
-                <label>Day </label>
-                <input
-                  required
-                  type="number"
-                  min="1"
-                  max="31"
-                  onChange={(event) => handleStartChangeDay(event)}
-                />
-              </div>
-
-              <div>
-                <label>Month </label>
-                <select
-                  onChange={(event) => handleStartChangeMonth(event)}
-                  required={true}
-                >
-                  <option aria-readonly>Select</option>
-                  <option value="01">January</option>
-                  <option value="02">February</option>
-                  <option value="03">March</option>
-                  <option value="04">April</option>
-                  <option value="05">May</option>
-                  <option value="06">June</option>
-                  <option value="07">July</option>
-                  <option value="08">August</option>
-                  <option value="09">September</option>
-                  <option value="10">October</option>
-                  <option value="11">November</option>
-                  <option value="12">December</option>
-                </select>
-              </div>
-
-              <div>
-                <label>Year </label>
-                <input
-                  type="number"
-                  required={true}
-                  minLength={4}
-                  maxLength={4}
-                  onChange={(event) => handleStartChangeYear(event)}
-                />
-              </div>
-            </div>
+        <label>Start date</label>
+        {errors.startDay || errors.startMonth || errors.startYear ? (
+          <p>This Field is required.</p>
+        ) : null}
+        <br />
+        <div className={styles.container__startDate}>
+          <div>
+            <label>Day</label>
+            <input
+              {...register("startDay", { required: true })}
+              type="number"
+              min="1"
+              max="31"
+              onChange={(event) => setStartDay(event.target.value)}
+            />
           </div>
 
           <div>
-            <label>Finish date</label>
-            <br />
-            <div className={styles.container__finishDate}>
-              <div>
-                <label>Day </label>
-                <input
-                  required
-                  type="number"
-                  min="1"
-                  max="31"
-                  onChange={(event) => handleFinishChangeDay(event)}
-                />
-              </div>
-
-              <div>
-                <label>Month </label>
-
-                <select
-                  onChange={(event) => handleFinishChangeMonth(event)}
-                  required={true}
-                >
-                  <option aria-readonly>Select</option>
-                  <option value="01">January</option>
-                  <option value="02">February</option>
-                  <option value="03">March</option>
-                  <option value="04">April</option>
-                  <option value="05">May</option>
-                  <option value="06">June</option>
-                  <option value="07">July</option>
-                  <option value="08">August</option>
-                  <option value="09">September</option>
-                  <option value="10">October</option>
-                  <option value="11">November</option>
-                  <option value="12">December</option>
-                </select>
-              </div>
-
-              <div>
-                <label>Year </label>
-                <input
-                  type="number"
-                  required={true}
-                  min="1950"
-                  max="2023"
-                  onChange={(event) => handleFinishChangeYear(event)}
-                />
-              </div>
-            </div>
+            <label>Month</label>
+            <select
+              {...register("startMonth", { required: true })}
+              onChange={(event) => setStartMonth(event.target.value)}
+            >
+              <option></option>
+              <option value="01">January</option>
+              <option value="02">February</option>
+              <option value="03">March</option>
+              <option value="04">April</option>
+              <option value="05">May</option>
+              <option value="06">June</option>
+              <option value="07">July</option>
+              <option value="08">August</option>
+              <option value="09">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
           </div>
 
-          <div className={styles.container__ongoing_checkbox}>
-            <input type="checkbox" {...register("ongoing")} />
-            <label>on going</label>
+          <div>
+            <label>Year</label>
+            <input
+              {...register("startYear", { required: true })}
+              type="number"
+              min="1960"
+              max="2023"
+              onChange={(event) => setStartYear(event.target.value)}
+            />
           </div>
+        </div>
+      </div>
+
+      <div>
+        <label>Finish date</label>
+        {errors.finishDay || errors.finishMonth || errors.finishYear ? (
+          <p>This Field is required.</p>
+        ) : null}
+        <br />
+        <div className={styles.container__finishDate}>
+          <div>
+            <label>Day </label>
+            <input
+              {...register("finishDay", { required: true })}
+              type="number"
+              value={finishDay}
+              min="1"
+              max="31"
+              onChange={(event) => setFinishDay(event.target.value)}
+            />
+          </div>
+
+          <div>
+            <label>Month </label>
+
+            <select
+              {...register("finishMonth", { required: true })}
+              value={finishMonth}
+              onChange={(event) => setFinishMonth(event.target.value)}
+            >
+              <option></option>
+              <option value="01">January</option>
+              <option value="02">February</option>
+              <option value="03">March</option>
+              <option value="04">April</option>
+              <option value="05">May</option>
+              <option value="06">June</option>
+              <option value="07">July</option>
+              <option value="08">August</option>
+              <option value="09">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+          </div>
+
+          <div>
+            <label>Year </label>
+            <input
+              {...register("finishYear", { required: true })}
+              type="number"
+              value={finishYear}
+              min="1960"
+              max="2070"
+              onChange={(event) => setFinishYear(event.target.value)}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.container__ongoing_checkbox}>
+        <input
+          type="checkbox"
+          {...register("ongoing")}
+          onChange={handleOnGoing}
+        />
+        <label>on going</label>
+      </div>
 
           <div className={styles.container__timebasis}>
             <label>Is this on a full-time or part-time basis?</label>

@@ -15,7 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<GetAllEmployees />} />
             <Route path="/AddEmployee" element={<Form />} />
-            {/* <Route path="/EditEmployee/:id" element={<EditEmployee />} /> */}
+            <Route path="/EditEmployee/:id" element={<EditEmployee />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
