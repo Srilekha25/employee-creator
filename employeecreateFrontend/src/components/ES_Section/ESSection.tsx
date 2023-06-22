@@ -16,8 +16,8 @@ const ESSection = ({ register, errors }: any) => {
     const currentMonth = String(currentDate.getMonth() + 1);
     const currentYear = String(currentDate.getFullYear());
 
-    setFinishDay(currentDay);
-    setFinishMonth(currentMonth);
+    setFinishDay(currentDay.padStart(2, '0'));
+    setFinishMonth(currentMonth.padStart(2, '0'));
     setFinishYear(currentYear);
   };
 
