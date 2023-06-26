@@ -53,7 +53,7 @@ const GetAllEmployees = () => {
         </div>
         <hr className={styles.hr__solid}></hr>
         {isLoading ? (
-          <p>Loading...</p>
+          <p><h3>Loading...</h3></p>
         ) : (
           <div>
             {allEmployees?.map((employee: Employee, index: number) => (
