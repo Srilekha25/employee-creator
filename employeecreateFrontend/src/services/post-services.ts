@@ -1,6 +1,6 @@
 import { Employee } from "../Interfaces/EmployeeInterface";
 
-export const getAllEmployees = async () =>{
+export const fetchEmployees = async () =>{
     const response = await fetch('http://localhost:8080/EmployeeCreator');
     return await response.json();
 }

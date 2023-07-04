@@ -1,6 +1,28 @@
+// import { useEmployeeContext } from "../../context/EmployeeSelectedProvider";
+import { useEffect, useState } from "react";
+import { useselectedEmployeeContext } from "../../context/EmployeeSelectedContext";
 import styles from "./PISection.module.scss";
+import { Employee } from "../../Interfaces/EmployeeInterface";
+import { useParams } from "react-router-dom";
 
-const PISection = ({ register, errors }: any) => {
+const PISection = ({ register, errors, edit }: any) => {
+  const { id } = useParams<{ id: string }>();
+  const { employeeSelected, setEmployeeSelected } =
+    useselectedEmployeeContext();
+  // 
+
+  // useEffect(()=>{
+  //   id ? setEdit(true) : setEdit(false)
+  // }, [id])
+
+  // console.log("its working");
+  // console.log("id: ", id);
+  console.log("employeeSelected", employeeSelected);
+
+  // const empSelected = employeeSelected.filter((emp) => emp.id === Number(id));
+  //  console.log("employeeSelected[0]", employeeSelected.firstName);
+  // console.log("empSelected", empSelected);
+
   return (
     <div className={styles.container__personal_details_flex}>
       <h2>Personal information</h2>
@@ -8,6 +30,7 @@ const PISection = ({ register, errors }: any) => {
       <label role="firstName">First name</label>
       <input
         data-testid="firstName"
+        // defaultValue={edit ? employeeSelected.firstName : ""}
         {...register("firstName", {
           required: true,
           maxLength: 20,
@@ -25,10 +48,14 @@ const PISection = ({ register, errors }: any) => {
       )}
 
       <label>Middle name (if applicable)</label>
-      <input {...register("middleName")} />
+      <input
+        // defaultValue={edit ? employeeSelected.middleName: ""}
+        {...register("middleName")}
+      />
 
       <label>Last name</label>
       <input
+        // defaultValue={edit ? employeeSelected.lastName: ""}
         {...register("lastName", {
           required: true,
           pattern: /^[A-Za-z]+$/i,

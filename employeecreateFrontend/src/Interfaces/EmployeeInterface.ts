@@ -1,4 +1,4 @@
-export interface Employee {
+export type Employee = {
   readonly id: number;
   firstName: string;
   middleName: string;

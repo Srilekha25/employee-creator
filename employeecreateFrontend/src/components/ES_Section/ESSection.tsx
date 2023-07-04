@@ -1,8 +1,12 @@
 import { useState } from "react";
 
 import styles from "./ESSection.module.scss";
+import { useselectedEmployeeContext } from "../../context/EmployeeSelectedContext";
 
-const ESSection = ({ register, errors }: any) => {
+const ESSection = ({ register, errors, edit }: any) => {
+  const { employeeSelected, setEmployeeSelected } =
+    useselectedEmployeeContext();
+
   const [startDay, setStartDay] = useState("");
   const [startMonth, setStartMonth] = useState("");
   const [startYear, setStartYear] = useState("");
@@ -16,8 +20,8 @@ const ESSection = ({ register, errors }: any) => {
     const currentMonth = String(currentDate.getMonth() + 1);
     const currentYear = String(currentDate.getFullYear());
 
-    setFinishDay(currentDay.padStart(2, '0'));
-    setFinishMonth(currentMonth.padStart(2, '0'));
+    setFinishDay(currentDay.padStart(2, "0"));
+    setFinishMonth(currentMonth.padStart(2, "0"));
     setFinishYear(currentYear);
   };
 
@@ -32,6 +36,7 @@ const ESSection = ({ register, errors }: any) => {
         <div className={styles.container__input_radio_buttons}>
           <div className={styles.container__input_radio_permanent}>
             <input
+              // defaultValue={edit ? employeeSelected.contractType : ""}
               {...register("contractType", { required: true })}
               type="radio"
               value="Permanet"
@@ -40,6 +45,7 @@ const ESSection = ({ register, errors }: any) => {
           </div>
           <div className={styles.container__input_radio_contract}>
             <input
+              // defaultValue={edit ? employeeSelected.contractType : ""}
               {...register("contractType", { required: true })}
               type="radio"
               value="Contract"
@@ -59,6 +65,7 @@ const ESSection = ({ register, errors }: any) => {
           <div>
             <label>Day</label>
             <input
+              // defaultValue={edit ? employeeSelected.startDate : ""}
               {...register("startDay", { required: true })}
               type="number"
               min="1"
@@ -70,6 +77,7 @@ const ESSection = ({ register, errors }: any) => {
           <div>
             <label>Month</label>
             <select
+              // defaultValue={edit ? employeeSelected.startMonth : ""}
               {...register("startMonth", { required: true })}
               onChange={(event) => setStartMonth(event.target.value)}
             >
@@ -92,6 +100,7 @@ const ESSection = ({ register, errors }: any) => {
           <div>
             <label>Year</label>
             <input
+              // defaultValue={edit ? employeeSelected.startYear : ""}
               {...register("startYear", { required: true })}
               type="number"
               min="1960"
@@ -112,6 +121,7 @@ const ESSection = ({ register, errors }: any) => {
           <div>
             <label>Day </label>
             <input
+              // defaultValue={edit ? employeeSelected.finishDay : ""}
               {...register("finishDay", { required: true })}
               type="number"
               value={finishDay}
@@ -125,6 +135,7 @@ const ESSection = ({ register, errors }: any) => {
             <label>Month </label>
 
             <select
+              // defaultValue={edit ? employeeSelected.finishMonth : ""}
               {...register("finishMonth", { required: true })}
               value={finishMonth}
               onChange={(event) => setFinishMonth(event.target.value)}
@@ -148,6 +159,7 @@ const ESSection = ({ register, errors }: any) => {
           <div>
             <label>Year </label>
             <input
+              // defaultValue={edit ? employeeSelected.finishYear : ""}
               {...register("finishYear", { required: true })}
               type="number"
               value={finishYear}
@@ -161,6 +173,7 @@ const ESSection = ({ register, errors }: any) => {
 
       <div className={styles.container__ongoing_checkbox}>
         <input
+          // defaultValue={edit ? employeeSelected.ongoing : ""}
           type="checkbox"
           {...register("ongoing")}
           onChange={handleOnGoing}
@@ -175,6 +188,7 @@ const ESSection = ({ register, errors }: any) => {
         )}
         <div className={styles.container__fulltime_flex}>
           <input
+            // defaultValue={edit ? employeeSelected.timeBasis : ""}
             {...register("timeBasis", { required: true })}
             type="radio"
             value="Full-time"
@@ -183,6 +197,7 @@ const ESSection = ({ register, errors }: any) => {
         </div>
         <div className={styles.container__parttime_flex}>
           <input
+            // defaultValue={edit ? employeeSelected.timeBasis : ""}
             {...register("timeBasis", { required: true })}
             type="radio"
             value="Part-time"
@@ -193,7 +208,13 @@ const ESSection = ({ register, errors }: any) => {
 
       <div className={styles.container__hours}>
         <label>Hours per week</label>
-        <input type="number" min="0" max="168" {...register("hours")} />
+        <input
+          type="number"
+          min="0"
+          max="168"
+          // defaultValue={edit ? employeeSelected.hours : ""}
+          {...register("hours")}
+        />
       </div>
     </div>
   );

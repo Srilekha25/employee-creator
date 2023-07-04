@@ -1,35 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Employee } from "../../Interfaces/EmployeeInterface";
 import { deleteEmployeeByID } from "../../services/post-services";
-import { getAllEmployees } from "../../services/post-services";
+import { fetchEmployees } from "../../services/post-services";
 
 import styles from "../GetAllEmployees/GetAllEmployees.module.scss";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+//import { useEmployeeContext } from "../../context/EmployeeSelectedProvider";
+import { useselectedEmployeeContext } from "../../context/EmployeeSelectedContext";
 
 const GetAllEmployees = () => {
-
+  const { employeeSelected, setEmployeeSelected } =
+    useselectedEmployeeContext();
   const queryClient = useQueryClient();
-  const {
-    data: allEmployees,
-    isLoading,
-    isError,
-  } = useQuery<Employee[] | null>(["allEmployees"], getAllEmployees);
-  if (isError) {
+  const { data: allEmployees, isLoading } = useQuery(
+    ["allEmployees"],
+    fetchEmployees
+  );
+
+  console.log("allEmployees", allEmployees);
+
+  if (allEmployees === null) {
     return <h2>Error while fetching Employees.</h2>;
-  }
+  } 
+  // else {
+  //   setEmployeeSelected(allEmployees);
+  // }
 
   const currentDate = new Date();
 
-  const mutation = useMutation(async (employeeIdToDelete: number) => {
+  const deleteById = useMutation(async (employeeIdToDelete: number) => {
     return await deleteEmployeeByID(employeeIdToDelete).then(
       (response: Boolean) => {
         if (response) {
-          const updatedEmployees = allEmployees?.filter(
-            (employee) => employee.id !== employeeIdToDelete
+          const updatedEmployeesAfterDelete = allEmployees?.filter(
+            (employee: Employee) => employee.id !== employeeIdToDelete
           );
-            console.log("all employees after delete", allEmployees);
-           queryClient.setQueryData(["allEmployees"], updatedEmployees);
+          console.log(
+            "all employees after delete",
+            updatedEmployeesAfterDelete
+          );
+          queryClient.setQueryData(
+            ["allEmployees"],
+            updatedEmployeesAfterDelete
+          );
         }
       }
     );
@@ -53,10 +67,12 @@ const GetAllEmployees = () => {
         </div>
         <hr className={styles.hr__solid}></hr>
         {isLoading ? (
-          <p><h3>Loading...</h3></p>
+          <p>
+            <h3>Loading...</h3>
+          </p>
         ) : (
           <div>
-            {allEmployees?.map((employee: Employee, index: number) => (
+            {allEmployees?.map((employee: any, index: number) => (
               <div key={index}>
                 <div className={styles.container__employees_flex}>
                   <div>
@@ -70,13 +86,14 @@ const GetAllEmployees = () => {
                     <div>{employee.email}</div>
                   </div>
                   <div className={styles.container__buttons_flex}>
-                    <button>
-                      <Link to={`EditEmployee/${employee.id}`}>Edit</Link>
+                    <button
+                      onClick={()=>setEmployeeSelected(employee)}>
+                      <Link to={`/EditEmployee/${employee.id}`}>Edit</Link>
                     </button>
                     |
                     <button
                       onClick={() => {
-                        mutation.mutate(employee.id);
+                        deleteById.mutate(employee.id);
                       }}
                     >
                       Delete
